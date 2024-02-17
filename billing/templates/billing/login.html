@@ -1,0 +1,26 @@
+{% extends "frontmain/front.html" %}
+{% block title %}Login{% endblock %}
+{% load static %}
+{% block content %}
+
+
+
+
+<div class="new-order-input">
+    <div></div>
+    <div>
+        <h4 class="mt-3 mb-2">Login</h4>
+            {% load crispy_forms_tags %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary mt-3 mb-3" style="width: 100%;">Login</button>
+                <p>Don't have an account? <a href="{% url 'register' %}"> Sign Up</a>.</p>
+                <p>Forgot Password? <a href="{% url 'reset_password' %}"> Reset It Here</a>.</p>  
+              </form>
+            
+    </div>
+    <div></div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,337 @@
+{% extends "frontmain/main.html" %}
+{% block title %}Active Orders{% endblock %}
+{% load static %}
+{% block content %}
+{% load humanize %}
+<section>
+  
+<script>
+  var countDownDate = new Date("{{ order.deadline.isoformat}}").getTime();
+  console.log(countDownDate);
+  var myfunc = setInterval(function() {
+    // code goes here
+    var now = new Date().getTime();
+    var timeleft = countDownDate - now;
+    var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
+    if (days > 0) {
+    document.getElementById("days").innerHTML = days + "D ";
+    }
+    document.getElementById("hours").innerHTML = hours + "H ";
+    document.getElementById("mins").innerHTML = minutes + "M ";
+    document.getElementById("secs").innerHTML = seconds + "S ";
+
+
+    if (timeleft < 0) {
+      clearInterval(myfunc);
+      document.getElementById("days").innerHTML = ""
+      document.getElementById("hours").innerHTML = "" 
+      document.getElementById("mins").innerHTML = ""
+      document.getElementById("secs").innerHTML = ""
+      document.getElementById("none").innerHTML = "NONE";
+  }
+
+
+    }, 1000)
+
+
+  
+</script>
+
+
+
+
+
+  <div class="orderdetails">
+    <div></div>
+
+
+
+    <div>
+      <div class="orderdetailsmain">
+        {% if not orderinfo %}
+        <div class="alert alert-primary mt-2" role="alert">
+          Add clear instructions for your paper, to enable writers better understand what is required.
+        </div>
+
+        {% elif orderinfo and not paid %}
+        <div class="alert alert-primary mt-2" role="alert">
+          Complete your order by making a payment. <a href="{% url 'order_payment' order.id %}" class="alert-link">Click Here to Proceed</a>
+        </div>
+        {% endif %}
+
+
+        <div class="card mt-3 text-left">
+          <div class="card-header">
+            <h6 class="small"><strong>Requirements</strong></h6>
+            <p class="small">Formating: <strong>Writing</strong></p>
+          </div>
+        </div>
+
+        <div class="mt-3 mb-3" >
+
+          {% if order.paid == False %}
+      
+          <p class="small mb-3 mt-3" style="text-transform: uppercase; color: #A9A9A9; letter-spacing: 2px;">
+          <strong>
+            TIME REMAINING:
+            {% if order.days %}
+             {{ order.days }} Days
+            {% endif %}
+            {% if order.hours %} 
+            {{ order.hours }} Hours
+            {% endif %}
+          </strong>
+        </p>
+   
+      {% else %}
+   
+      <p style="display:inline-block; text-transform: uppercase; color: #A9A9A9; letter-spacing: 2px; font-weight: bold;" class="small " >
+        Time remaining:
+      </p>
+      <p  id="days" style="display:inline-block; text-transform: uppercase; color: #A9A9A9; letter-spacing: 2px;font-weight: bold;" class="small " ></p>
+      <p id="hours" style="display:inline-block; text-transform: uppercase; color: #A9A9A9; letter-spacing: 2px;font-weight: bold;" class="small "></p>
+      <p id="mins" style="display:inline-block; text-transform: uppercase; color: #A9A9A9; letter-spacing: 2px;font-weight: bold;" class="small "> </p>
+      <p id="secs" style="display:inline-block; text-transform: uppercase; color: #A9A9A9; letter-spacing: 2px;font-weight: bold;" class="small "> </p>
+      <p id="none" style="display:inline-block; text-transform: uppercase; color: #A9A9A9; letter-spacing: 2px;font-weight: bold;" class="small "> </p>
+ 
+      {% endif %}
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+        
+        {% if order.title %}
+        <div class="mb-3 mt-3">
+          <h5><strong>{{ order.title}}</strong></h5>
+        </div>
+      {% else %}
+      <div class="mb-3 mt-3">
+          <h5><strong>Untitled</strong></h5>
+        </div>
+      {% endif %}
+  
+
+        <div class="order-details1 mt-3 mb-2 pt-3 pb-3">
+          <div>
+
+
+            <div class="unit unit-spacing-xs">
+              <div class="unit-left"><span class="icon fa fa-graduation-cap"></span></div>
+              <div class="unit-body">
+                <p >{{ order.subject}}</p>
+              </div>
+            </div>
+            
+          </div>
+          <div>
+
+            <div class="unit unit-spacing-xs">
+              <div class="unit-left"><span class="icon fa fa-file-text"></span></div>
+              <div class="unit-body">
+                <p>{{ order.pages}} ({{ words}} Words)</p>
+              </div>
+            </div>
+
+
+
+            
+          </div>
+          <div>
+
+            <div class="unit unit-spacing-xs">
+              <div class="unit-left"><span class="icon fa fa-credit-card"></span></div>
+              <div class="unit-body">
+                <p>KES {{ cost }}</p>
+              </div>
+            </div>
+
+
+
+            
+          </div>
+          <div>
+
+
+            <div class="unit unit-spacing-xs">
+              <div class="unit-left"><span class="icon fa fa-pencil"></span></div>
+              <div class="unit-body">
+                <p><a href="{% url 'order_update' order.id %}">Edit</a></p>
+              </div>
+            </div>
+            
+
+
+
+
+          </div>
+        </div>
+
+        <br><br>
+
+
+
+        {% for obj in orderinfo %}
+        {% if obj.is_mod == False %}
+
+        <div class="text-left"> 
+          {% if obj.instructions %}
+          <p class="text-left pl-2">{{ obj.instructions|safe}}</p>
+          {% endif %}
+          {% if obj.file %}
+          <div>
+
+            <div class="file-row-disp mt-4">
+              <div>
+                <span class="icon fa fa-file-text-o mb-1" style="font-size:5em;"></span>
+              </div>
+              <div>
+                <p><a target="_blank" href="{{ obj.file.url }}"  >Attachement</a></p>
+              </div>
+            
+            </div>
+
+          </div>
+          
+
+          {% endif %}
+          <br>
+          <div>
+            <p class="text-right small">{{ obj.created_at|naturaltime }}</p>
+          </div>
+          <br>
+          
+        </div>
+
+
+
+        {% elif obj.is_mod == True and obj.is_answer == False %}
+
+
+
+
+        <div class="card bg-secondary mt-3 text-left">
+          <div class="card-header">
+            {% if obj.instructions %}
+            <p class="text-left pl-2">{{ obj.instructions|safe}}</p>
+            {% endif %}
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+        <br>
+          <div>
+            <p class="text-right small">{{ obj.created_at|naturaltime }}</p>
+          </div>
+          <br>
+
+
+
+
+
+
+        {% elif obj.is_mod == True and obj.is_answer == True %}
+       
+
+        
+          <div >
+            {% if obj.instructions %}
+            <p class="text-left pl-2">{{ obj.instructions|safe}}</p>
+            {% endif %}
+          </div>
+
+
+
+
+
+
+
+
+
+
+        {% if obj.file %}
+          <div class="card">
+            <div class="card-body">
+              <p><a target="_blank" href="{{ obj.file.url }}" >{{ obj.file.name }}</a></p>
+            </div>
+          </div>
+          {% endif %}
+
+          <br>
+          <div>
+            <p class="text-right small">{{ obj.created_at|naturaltime }}</p>
+          </div>
+          <br>
+        {% endif %}
+        {% endfor%}
+        
+    
+
+
+
+
+      <div class="addinst">
+      <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.media }}
+          {{ form.as_p }}
+          <br>
+          <button type="submit" class="btn btn-primary mb-4" style="width: 100%;">Post</button>
+          
+        </form>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+      
+      </div>
+
+
+
+
+
+    </div>
+
+
+
+
+    <div></div>
+  </div>
+</section>
+
+
+{% endblock %}
+

@@ -1,0 +1,127 @@
+.orderdashsection {
+	margin-top: 1%;
+	display: grid;
+    grid-template-columns: 25% 75%;
+
+}
+
+.orderdetailsmain {
+    margin-right:2%;
+    margin-left:2%;
+}
+
+.addinst {
+    margin-left:4%;
+    margin-right:2%;
+}
+
+.order-details1 {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    border-top: 1px solid gainsboro;
+    border-bottom: 1px solid gainsboro;
+}
+
+.fsmall {
+    font-size: small"
+}
+
+
+.orderdetails {
+    display: grid;
+    grid-template-columns: 16% 68% 16%;
+    border-top: 1px solid gainsboro;
+    border-bottom: 1px solid gainsboro;
+    min-height: 88vh;
+    background-color: whitesmoke;
+}
+
+.orderlistdiv {
+    display: grid;
+    grid-template-columns: 60% 20% 20%;
+    border-top: 1px solid gainsboro;
+}
+
+.fin-orders {
+    border-top: 1px solid gainsboro;
+    opacity: .3;
+}
+
+.home-main {
+	display: grid;
+    grid-template-columns: 60% 40%;
+    background-color: #151515;
+
+}
+
+.form-div-wrapp {
+    padding: 4%;
+    margin-top: 4%;
+    margin-bottom: 3%;
+    margin-right: 10%;
+    background-color: #E6E6FA;
+    border-radius: 8px;
+    color: #29293a;
+}
+
+.new-order-input {
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+}
+
+.new-order-input-main {
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    height: 88vh;
+    background-color: whitesmoke;
+}
+
+.file-row-disp {
+    display: grid;
+    grid-template-rows: auto;
+}
+
+
+.home-content-1 {
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+}
+
+.home-content-2 {
+    padding-top: 9em;
+}
+
+.sidediv1 {
+    background-color: lavender;  /* fallback for old browsers */
+   }
+
+
+.sided {
+    background-color:#556;
+    background-image: linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+    linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+    linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+    linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+    linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a), 
+    linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a);
+    background-size:80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+    }
+
+
+.sided2 {
+    background-color: #e5e5f7;
+    opacity: 0.8;
+    background-size: 10px 10px;
+    background-image: repeating-linear-gradient(45deg, #444cf7 0, #444cf7 1px, #e5e5f7 0, #e5e5f7 50%);
+
+}
+.in-progress {
+    display: grid;
+    grid-template-columns: 15% 85%;
+}
+
+
+.order-link a:hover {
+    color:green;
+}

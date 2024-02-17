@@ -1,0 +1,303 @@
+{% extends "frontmain/front.html" %}
+{% block title %}Home{% endblock %}
+{% load static %}
+{% block content %}
+
+
+<section>
+ <div class="home-main">
+    <div>
+
+      <div class="home-content-1">
+        <div></div>
+        <div class="home-content-2">
+          <h3 class=" ml-1 mt-3" style="color: white;">Don't Compromise on Quality</h3>
+          <hr>
+          <p class="text-spacing-sm" style="color: white;">We offer a variety of destinations to travel to, ranging from exotic to some extreme ones. They include very popular countries and cities like Paris, Rio de Janeiro, Cairo and a lot of others.</p><a class="button button-default-outline button-nina button-sm" href="#">learn more</a>
+        </div>
+        <div></div>
+        
+      </div>
+
+
+                 
+                    
+                    
+                    
+                
+  
+           
+
+
+    </div>
+
+
+
+
+
+    <!-- second div -->
+    <div>
+
+        <div class="form-div-wrapp">
+
+
+            <h4>Create Order</h4>
+            <!-- RD Mailform-->
+            <form class="rd-mailform form-fix" action="" method="POST">{% csrf_token %}
+              <div class="row row-20 row-fix">
+
+
+
+                  <div class="col-sm-12">
+                      <label class="form-label-outside">Title</label>
+                      <div class="form-wrap form-wrap-inline">
+                          <input required class="form-input" name="title" type="text" placeholder="My Title" />
+                
+                      </div>
+                    </div>
+
+
+
+
+
+
+                <div class="col-sm-12">
+                  <label class="form-label-outside">Subject</label>
+                  <div class="form-wrap form-wrap-inline">
+                    <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="subject">
+                      <option value="Accounting">Accounting</option>
+                      <option value="Management">Management</option>
+                      <option value="Marketing">Marketing</option>
+                      <option value="Finance">Finance</option>
+                      <option value="Nursing">Nursing</option>
+                      <option value="Arts">Arts</option>
+                      <option value="History">History</option>
+                      <option value="English">English</option>
+                      <option value="Law">Law</option>
+                      <option value="Economics">Economics</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="col-sm-12">
+                  <label class="form-label-outside">Pages</label>
+                  <div class="form-wrap form-wrap-modern">
+                      <input class="form-input input-append" id="form-element-stepper-1" type="number" min="0" max="300" value="1" name="pages"/>
+                  </div>
+                </div>
+              
+
+
+
+
+                <div class="col-lg-6">
+                  <label class="form-label-outside">Days</label>
+                  <div class="form-wrap form-wrap-modern">
+                    <input class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="0" name="days"/>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <label class="form-label-outside">Hours</label>
+                  <div class="form-wrap form-wrap-modern">
+                    <input class="form-input input-append" id="form-element-stepper-1" type="number" min="0" max="300" value="0" name="hours"/>
+                  </div>
+                </div>
+              </div>
+              <div class="form-wrap form-button">
+                <button class="button button-block button-secondary" type="submit">Continue</button>
+              </div>
+            </form>
+
+
+
+        </div>
+
+
+    </div>
+ </div>
+
+  
+</section>
+
+
+<section class="section section-lg bg-gray-lighter novi-background bg-cover text-center">
+  <div class="container container-wide">
+    <h3>our services</h3>
+    <div class="divider divider-decorate"></div>
+    <div class="row row-50 justify-content-sm-center text-left">
+      <div class="col-sm-10 col-md-6 col-xl-3">
+        <article class="box-minimal box-minimal-border">
+          <div class="box-minimal-icon novi-icon mdi mdi-airplane"></div>
+          <p class="big box-minimal-title">Essay Writing</p>
+          <hr>
+          <div class="box-minimal-text text-spacing-sm">Our writer pool consists of highly experienced and talented writers who abide by the highest possible standards in the industry. </div>
+        </article>
+      </div>
+      <div class="col-sm-10 col-md-6 col-xl-3">
+        <article class="box-minimal box-minimal-border">
+          <div class="box-minimal-icon novi-icon mdi mdi-map"></div>
+          <p class="big box-minimal-title">Editing</p>
+          <hr>
+          <div class="box-minimal-text text-spacing-sm">Our editors will go through you manuscript, essay or any other form of writing and upgrade to commercial standards.</div>
+        </article>
+      </div>
+      <div class="col-sm-10 col-md-6 col-xl-3">
+        <article class="box-minimal box-minimal-border">
+          <div class="box-minimal-icon novi-icon mdi mdi-city"></div>
+          <p class="big box-minimal-title">Bespoke Research</p>
+          <hr>
+          <div class="box-minimal-text text-spacing-sm">Intrested in high quality original research with numerous peer reviewed sources? We will provide that for you</div>
+        </article>
+      </div>
+      <div class="col-sm-10 col-md-6 col-xl-3">
+        <article class="box-minimal box-minimal-border">
+          <div class="box-minimal-icon novi-icon mdi mdi-beach"></div>
+          <p class="big box-minimal-title">Data Analysis</p>
+          <hr>
+          <div class="box-minimal-text text-spacing-sm">Our SPPS, STATA, R, Python, Excel data analysts can analyze your data in less than a day. </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tips & tricks-->
+<section class="section section-lg novi-background bg-cover bg-default text-center">
+  <div class="container-wide">
+    <div class="row row-50">
+      <div class="col-sm-12">
+        <h3>Latest News</h3>
+        <div class="divider divider-decorate"></div>
+        <!-- Owl Carousel-->
+        <div class="owl-carousel owl-carousel-team owl-carousel-inset" data-items="1" data-md-items="2" data-xl-items="3" data-stage-padding="15" data-loop="true" data-margin="30" data-mouse-drag="false" data-dots="true" data-autoplay="true">
+          <article class="post-blog"><a class="post-blog-image" href="#"><img src="{% static 'frontmain/images2/write.png' %}" alt="" width="570" height="415"/></a>
+            <div class="post-blog-caption">
+              <div class="post-blog-caption-header">
+                <ul class="post-blog-tags">
+                  <li><a class="button-tags" href="#">Writing</a></li>
+                </ul>
+                <ul class="post-blog-meta">
+                  <li><span>by</span>&nbsp;<a href="#">Our Editors</a></li>
+                </ul>
+              </div>
+              <div class="post-blog-caption-body">
+                <h5><a class="post-blog-title" href="#">Top Ten Mistakes Made by Rookie Academic Writers</a></h5>
+              </div>
+              <div class="post-blog-caption-footer">
+                <time datetime="2019">Feb 3, 2024 at 6:53 pm</time><a class="post-comment" href="#"><span class="icon novi-icon icon-md-middle icon-gray-1 mdi mdi-comment"></span><span>12</span></a>
+              </div>
+            </div>
+          </article>
+          <article class="post-blog"><a class="post-blog-image" href="#"><img src="{% static 'frontmain/images2/author.jpg' %}" alt="" width="570" height="415"/></a>
+            <div class="post-blog-caption">
+              <div class="post-blog-caption-header">
+                <ul class="post-blog-tags">
+                  <li><a class="button-tags" href="#">Tips</a></li>
+                </ul>
+                <ul class="post-blog-meta">
+                  <li><span>by</span>&nbsp;<a href="#">Our Editors</a></li>
+                </ul>
+              </div>
+              <div class="post-blog-caption-body">
+                <h5><a class="post-blog-title" href="#">How to Express Yourself Clearly in Your Writing</a></h5>
+              </div>
+              <div class="post-blog-caption-footer">
+                <time datetime="2019">Feb 4, 2024 at 6:53 pm</time><a class="post-comment" href="#"><span class="icon novi-icon icon-md-middle icon-gray-1 mdi mdi-comment"></span><span>12</span></a>
+              </div>
+            </div>
+          </article>
+          <article class="post-blog"><a class="post-blog-image" href="#"><img src="{% static 'frontmain/images2/ai2.jpg' %}" alt="" width="570" height="415"/></a>
+            <div class="post-blog-caption">
+              <div class="post-blog-caption-header">
+                <ul class="post-blog-tags">
+                  <li><a class="button-tags" href="#">Writing</a></li>
+                </ul>
+                <ul class="post-blog-meta">
+                  <li><span>by</span>&nbsp;<a href="#">Ronald Chen</a></li>
+                </ul>
+              </div>
+              <div class="post-blog-caption-body">
+                <h5><a class="post-blog-title" href="#">How to Prevent Your Content From Being Flagged as AI Generated</a></h5>
+              </div>
+              <div class="post-blog-caption-footer">
+                <time datetime="2019">Feb 5, 2024 at 6:53 pm</time><a class="post-comment" href="#"><span class="icon novi-icon icon-md-middle icon-gray-1 mdi mdi-comment"></span><span>12</span></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="col-12"><a class="button button-secondary button-nina button-offset-lg" href="#">view all blog posts</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-lg text-center bg-gray-lighter novi-background bg-cover">
+  <div class="container container-bigger">
+    <h3>testimonials</h3>
+    <div class="divider divider-decorate"></div>
+    <!-- Owl Carousel-->
+    <div class="owl-carousel owl-layout-1" data-items="1" data-dots="true" data-nav="true" data-stage-padding="0" data-loop="true" data-margin="30" data-mouse-drag="false" data-autoplay="true">
+      <article class="quote-boxed">
+        <div class="quote-boxed-aside"><img class="quote-boxed-image" src="images/quote-user-1-210x210.jpg" alt="" width="210" height="210"/>
+        </div>
+        <div class="quote-boxed-main">
+          <div class="quote-boxed-text">
+            <p>Impressed with this writing service! They demonstrated professionalism, meeting tight deadlines while maintaining high-quality content. The communication was seamless, ensuring my needs were understood and incorporated into the work. Competitive pricing and a skilled team make them my top choice for writing assistance. A reliable and efficient service that delivers on its promises. Highly recommended! </p>
+          </div>
+          <div class="quote-boxed-meta">
+            <p class="quote-boxed-cite">Kevin Ouko</p>
+            <p class="quote-boxed-small">Regular Customer</p>
+          </div>
+        </div>
+      </article>
+      <article class="quote-boxed">
+        <div class="quote-boxed-aside"><img class="quote-boxed-image" src="images/quote-user-2-210x210.jpg" alt="" width="210" height="210"/>
+        </div>
+        <div class="quote-boxed-main">
+          <div class="quote-boxed-text">
+            <p>
+              I highly recommend this writing service! Their team demonstrated exceptional professionalism, delivering a meticulously crafted piece that exceeded my expectations. The communication was seamless, and the turnaround time was impressive. Affordable pricing coupled with top-notch quality makes them a reliable choice for any writing needs. Trustworthy, efficient, and consistently excellent – I couldn't be more satisfied!</p>
+          </div>
+          <div class="quote-boxed-meta">
+            <p class="quote-boxed-cite">Kipkemboi Justus</p>
+            <p class="quote-boxed-small">Regular Customer</p>
+          </div>
+        </div>
+      </article>
+      <article class="quote-boxed">
+        <div class="quote-boxed-aside"><img class="quote-boxed-image" src="images/quote-user-3-210x210.jpg" alt="" width="210" height="210"/>
+        </div>
+        <div class="quote-boxed-main">
+          <div class="quote-boxed-text">
+            <p>This writing service is a game-changer! Impeccable quality, timely delivery, and a seamless process from order to completion. The writers exhibit a profound understanding of diverse topics, ensuring my requirements were not just met but exceeded. Competitive pricing and exceptional customer support make it my top choice for any writing needs. A truly commendable service!</p>
+          </div>
+          <div class="quote-boxed-meta">
+            <p class="quote-boxed-cite">Samantha Charo</p>
+            <p class="quote-boxed-small">Regular Customer</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-md text-center text-md-left bg-gray-700 novi-background bg-cover">
+  <div class="container container-wide">
+    <div class="row row-fix row-50 justify-content-sm-center">
+      <div class="col-xxl-8">
+        <div class="box-cta box-cta-inline">
+          <div class="box-cta-inner">
+            <h3 class="box-cta-title">Get Your Essay Written Now by An Expert</h3>
+            <p>Using our website, you can get a top notch essay on any subject within any deadline.</p>
+          </div>
+          <div class="box-cta-inner"><a class="button button-secondary button-nina" href="#">Sign Up</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><a class="section section-banner" href="https://www.templatemonster.com/intense-multipurpose-html-template.html" style="background-image: url(images/banner/background-03-1920x310.jpg); background-image: -webkit-image-set( url(images/banner/background-03-1920x310.jpg) 1x, url(images/banner/background-03-3840x620.jpg) 2x )"><img src="images/banner/foreground-03-1600x310.png" srcset="images/banner/foreground-03-1600x310.png 1x, images/banner/foreground-03-3200x620.png 2x" alt="" width="1600" height="310"></a>
+
+{% endblock %}
+
