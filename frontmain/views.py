@@ -28,7 +28,7 @@ def dash(request):
 
 def extender(request):
     return render(request, 'frontmain/main.html')
-
+@login_required
 def newOrder(request):
     if request.method == "POST":
         form = OrderCreationForm(request.POST)
@@ -60,7 +60,7 @@ def createOrder(request):
     else:
         return render(request, 'frontmain/createOrder.html')
 
-
+@login_required
 def OrderDetail(request, id):
     order = Order.objects.get(id=id)
     paid = PayData.objects.filter(order=order).values_list('created_at', flat = True)
