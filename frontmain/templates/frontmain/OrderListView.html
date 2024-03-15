@@ -3,42 +3,87 @@
 {% load static %}
 {% block content %}
 
+<style>
+
+    .fcc-btn {
+        background-color: #199319;
+        color: white;
+        padding:0.5rem 3rem;
+        text-decoration: none;
+    } 
+    
+    
+    .fcc-btn1 {
+        background-color: dodgerblue;
+        color: white;
+        padding:0.5rem 3rem;
+        text-decoration: none;
+        border-radius: 0.3rem;
+    }
+
+
+
+
+</style>
+
+{% if not orders %}
+<section>
+    <div class="orderdetails">
+        <div class="sidediv1"></div>
+        <div class="no-order" >
+
+
+            <div class="card text-center">
+            
+                <div class="card-body">
+                  <h5 class="card-title">No Orders In Progress</h5>
+                  <p class="card-text mb-2">No Active Orders in Progress. Check for Complete Orders in the Complete Tab.</p>
+                  <a class="fcc-btn1 mt-2 mt-2 mb-2" href="{% url 'create_new' %}">Create Order</a>
+                </div>
+                
+              </div>
+
+
+
+
+        </div>
+        <div class="sidediv1"></div>
+    </div>
+
+
+
+
+</section>
+
+{% else  %}
+
+
 
 <section>
 
-    <style>
 
-        .fcc-btn {
-            background-color: #199319;
-            color: white;
-            padding:0.5rem 3rem;
-            text-decoration: none;
-        }          
-
-
-
-
-    </style>
     <div class="orderdetails">
         <div class="sidediv1"></div>
         <div class="mt-3">
           
-            <div style="border-bottom: 1px solid gainsboro;">
-            {% for obj in orders %}
-            <div class="orderlistdiv pt-3 pb-3">
-                
-                <div>
-                    {% if obj.title %}
-                    <a class="pl-2 order-link" style="padding-left:2rem;" href="{% url 'order_detail' obj.id %}"><strong>{{ obj.title|truncatewords:5 }}</strong></a>
-                    {% else %}
-                    <a class="pl-2" style="padding-left:2rem;" href="{% url 'order_detail' obj.id %}"><strong>{{ obj.subject }} Essay</strong></a>
-                    {% endif %}
-                </div>
+           
 
-                
-                <div>
-                    {% if obj.paid == True %}
-                    <div class="in-progress">
+
+        <div class="list-group">
+            {% for obj in orders %}
+            
+            <a href="{% url 'order_detail' obj.id %}" class="list-group-item list-group-item-action">
+                <div class="orderlistdiv">
+                    <div>
+                        {% if obj.title %}
+                        <strong>{{ obj.title|truncatewords:5 }}</strong>
+                        {% else %}
+                        <strong>{{ obj.subject }} Essay</strong>
+                        {% endif %}
+                    </div>
+                    <div >
+                        {% if obj.paid == True %}
+                        <div class="in-progress">
                         <div>
                             <span class="icon fa fa-check-square-o fa-2x mb-1" style="color:green"></span>  
                             
@@ -47,31 +92,51 @@
                         <div>
                             <p style="color:black;"><strong>&nbsp;&nbsp;In Progress</strong></p>
                         </div>
+                        </div>
+                        {% else %}
+
+                        <div class="in-progress">
+                            <div>
+                                <span class="icon fa fa fa-credit-card fa-2x mb-1" style="color:dodgerblue"></span>  
+                                
+                                <!--<img src="{% static 'frontmain/images2/arrows.png' %}" style="width: 100%;" alt="Computer man" > -->
+                            </div>
+                            <div>
+                                <p style="color:dodgerblue;"><strong>&nbsp;&nbsp;Payment Required</strong></p>
+                            </div>
+                            </div>
+                        {% endif %}
                     </div>
                     
-                    
-                    {% else %}
-                    <a class="fcc-btn" href="{% url 'order_payment' obj.id %}">Pay</a>
-                   <!-- <button type="button" onclick="location.href='{% url 'order_payment' obj.id %}'" class="btn btn-primary">Pay</button> -->
-                    {% endif %}
+                    <div>
+                        {% if obj.paid == False %}
+                        <p style="color:dodgerblue;"><strong>
+                            {% if obj.days and obj.days > 1 %}
+                            {{ obj.days }} days&nbsp;
+                            {% elif obj.days and obj.days == 1%}
+                            {{ obj.days }} day&nbsp;
+                            {% endif %}
+                            {% if obj.hours and obj.hours > 1 %}
+                            {{ obj.hours }} hours
+                            {% elif obj.hours and obj.hours == 1 %}
+                            {{ obj.hours }} hour
+                            {% endif %}
+                            </strong>
+                        </p> 
+               
+                       {% else %}
+                        <p id="timer{{obj.id}}" style="color:black;"><strong>
+                            {% if obj.time_left %}
+                            {{ obj.time_left}}
+                            {% endif %}
+                       
+                            
+                            </strong>
+                        </p>
+                        {% endif %}
+                    </div>
                 </div>
-                <div >
-
-
-
-
-
-
-      
-                    <p style="color:black;"><strong>
-                    {% if obj.days %}
-                    {{ obj.days }} D&nbsp;&nbsp;
-                    {% endif %}
-                    {% if obj.hours %}
-                    {{ obj.hours }} H
-                    {% endif %}
-                    </strong>
-                    </p>         
+            </a>
 
 
 
@@ -79,21 +144,10 @@
 
 
 
-
-
-
-
-                    
-
-                </div>
-            </div>
-            
-            
-            
             {% endfor %}
-
-        </div>
-
+           
+            
+          </div>
 
 
 
@@ -131,5 +185,6 @@
     
 
 </section>
+{% endif  %}
 {% endblock %}
 

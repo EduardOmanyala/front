@@ -1,0 +1,46 @@
+{% extends "frontmain/orderslist.html" %}
+{% block title %}Upload Files{% endblock %}
+{% load static %}
+{% block content %}
+
+<section>
+
+
+
+
+
+
+  <div class="orderdetails">
+    <div class="sided"></div>
+
+
+
+    <div>
+
+        <div class="file-upload">
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+                <br>
+                <button type="submit" class="btn btn-primary mb-4" style="width: 100%;">Upload</button>
+                
+              </form>
+
+
+        </div>
+      
+
+    </div>
+
+
+
+
+    <div class="sided"></div>
+  </div>
+</section>
+
+
+{% endblock %}
+

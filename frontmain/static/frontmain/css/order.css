@@ -33,13 +33,12 @@
     border-top: 1px solid gainsboro;
     border-bottom: 1px solid gainsboro;
     min-height: 88vh;
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 .orderlistdiv {
     display: grid;
-    grid-template-columns: 60% 20% 20%;
-    border-top: 1px solid gainsboro;
+    grid-template-columns: 55% 25% 20%;
 }
 
 .fin-orders {
@@ -124,4 +123,19 @@
 
 .order-link a:hover {
     color:green;
+}
+
+
+.no-order {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 2rem;
+    
+}
+
+
+.file-upload {
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
 }

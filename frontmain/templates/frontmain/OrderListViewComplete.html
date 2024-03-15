@@ -2,23 +2,62 @@
 {% block title %}Home{% endblock %}
 {% load static %}
 {% block content %}
+<style>
+
+    .fcc-btn {
+        background-color: #199319;
+        color: white;
+        padding:0.5rem 3rem;
+        text-decoration: none;
+    }  
+    .fcc-btn1 {
+        background-color: dodgerblue;
+        color: white;
+        padding:0.5rem 3rem;
+        text-decoration: none;
+        border-radius: 0.3rem;
+    }        
+
+
+
+
+</style>
+
+{% if not orders %}
+<section>
+    <div class="orderdetails">
+        <div class="sidediv1"></div>
+        <div class="no-order" >
+
+
+            <div class="card text-center">
+            
+                <div class="card-body">
+                  <h5 class="card-title">No Orders To Show</h5>
+                  <p class="card-text mb-2">No complete orders at the moment. Create a new order to get started.</p>
+                  <a class="fcc-btn1 mt-2 mt-2 mb-2" href="{% url 'create_new' %}">Create Order</a>
+                </div>
+                
+              </div>
+
+
+
+
+        </div>
+        <div class="sidediv1"></div>
+    </div>
+
+
+
+
+</section>
+
+{% else  %}
 
 
 <section>
 
-    <style>
-
-        .fcc-btn {
-            background-color: #199319;
-            color: white;
-            padding:0.5rem 3rem;
-            text-decoration: none;
-        }          
-
-
-
-
-    </style>
+  
     <div class="orderdetails">
         <div class="sidediv1"></div>
         <div class="mt-3">
@@ -128,5 +167,6 @@
     
 
 </section>
+{% endif %}
 {% endblock %}
 

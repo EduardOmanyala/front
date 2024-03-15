@@ -3,13 +3,15 @@ from django.contrib.auth.decorators import login_required
 from frontmain.models import Order, OrderData, PayInfo, Moderators, TestModel
 from billing.models import PayData
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
-from frontmain.forms import OrderCreationForm, OrderDetailsForm, ModMessagesForm
+from frontmain.forms import OrderCreationForm, OrderDetailsForm, ModMessagesForm, FileOrderDetailsForm
 from datetime import timedelta
 from django_daraja.mpesa.core import MpesaClient
 from django.views.decorators.http import require_POST
 #import datetime
 from datetime import datetime, timezone
 from django.contrib import messages
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage, send_mail
 
 import time
 
@@ -63,55 +65,47 @@ def createOrder(request):
 @login_required
 def OrderDetail(request, id):
     order = Order.objects.get(id=id)
-    paid = PayData.objects.filter(order=order).values_list('created_at', flat = True)
-    form = OrderDetailsForm()
-    orderinfo = OrderData.objects.filter(order=order)
-    # if order.time_paid:
-    #     order_hours = order.hours
-    #     order_days = order.days
-    #     deadline = order.time_paid + timedelta(days=order_days, hours=order_hours)
-    # else:
-    #     deadline = None
-        
+    mod_user = Moderators.objects.filter(user=request.user)
+    if mod_user:
+        return redirect('order_detail_mod', order.id)
+    else:
+        paid = PayData.objects.filter(order=order).values_list('created_at', flat = True)
+        form = OrderDetailsForm()
+        orderinfo = OrderData.objects.filter(order=order)
+        cost = order.pages * 300
+        words = order.pages * 275
+        if request.method == "POST":
+            form = OrderDetailsForm(request.POST, request.FILES)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.order = order
+                obj.save()
+                return redirect('order_detail', order.id)
+            else:
+                form = OrderDetailsForm()
+        return render(request, 'frontmain/OrderDetail.html', {
+            'order':order, 
+            'form':form, 
+            'orderinfo':orderinfo, 
+            'cost':cost, 
+            'words':words, 
+            'paid':paid,
+            })
 
-    # if paid:
-    #     time_paid = paid[0]
-    #     order_hours = order.hours
-    #     order_days = order.days
-    #     #deadline = order.created_at + timedelta(days=order_days, hours=order_hours)
-    #     deadline = time_paid + timedelta(days=order_days, hours=order_hours)
-    #     time_now = datetime.now(timezone.utc)
-    #     time_diff = deadline - time_now
-    #     time_left = '1'
-    #     time_left1 = 1
-    #     print(deadline)
-    
-
-    # else:
-    #     time_left = 1
-    #     time_left1 = 1
-    cost = order.pages * 300
-    words = order.pages * 275
+def FileUploadView(request, id):
+    order = Order.objects.get(id=id)
+    form = FileOrderDetailsForm()
     if request.method == "POST":
-        form = OrderDetailsForm(request.POST, request.FILES)
+        form = FileOrderDetailsForm(request.POST, request.FILES)
         if form.is_valid():
-            obj = form.save(commit=False)
-            obj.order = order
-            obj.save()
+            files = form.cleaned_data["file"]
+            for file in files:
+                OrderData.objects.create(order=order, file=file)
             return redirect('order_detail', order.id)
         else:
-            form = OrderDetailsForm()
-    return render(request, 'frontmain/OrderDetail.html', {
-        'order':order, 
-        'form':form, 
-        # 'time_left':time_left,
-        # 'time_left1':time_left1, 
-        'orderinfo':orderinfo, 
-        'cost':cost, 
-        'words':words, 
-        'paid':paid,
-        #'deadline':deadline
-        })
+            form = FileOrderDetailsForm()
+    return render(request, 'frontmain/uploadFiles.html', {'form' : form})
+
 
 @login_required
 def OrderListView(request):
@@ -190,6 +184,41 @@ def OrderUpdate(request, id):
      else:
          form = OrderCreationForm(instance=order)
      return render(request, 'frontmain/newOrder.html',  {'form': form})
+
+
+
+
+@login_required
+def OrderMessagesNotification(request, id):
+    order = Order.objects.get(id=id)
+    order_num = order.id
+    if order.title:
+        title = order.title
+    else:
+        title = order.subject
+    discipline = order.subject
+    email = str(request.user.email)
+    html_template = 'frontmain/ordermessages.html'
+    html_message = render_to_string(html_template, {'title': title, 'discipline': discipline, 'order_num':order_num})
+    subject = 'New Message on Your Order'
+    email_from = 'Testprep@testprepken.com'
+    recipient_list = [email]
+    message = EmailMessage(subject, html_message, email_from, recipient_list)
+    message.content_subtype = 'html'
+    message.send(fail_silently=True)
+    return redirect('order_detail', order.id)
+
+
+@login_required
+def OrderMessagesNotificationBrowser(request, id):
+    order = Order.objects.get(id=id)
+    order_num = order.id
+    if order.title:
+        title = order.title
+    else:
+        title = order.subject
+    discipline = order.subject
+    return render(request, 'frontmain/ordermessages.html', {'title': title, 'discipline': discipline, 'order_num':order_num})
 
 
 def payCallback(request, id):

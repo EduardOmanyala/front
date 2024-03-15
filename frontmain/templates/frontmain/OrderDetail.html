@@ -69,7 +69,7 @@
         <div class="card mt-3 text-left">
           <div class="card-header">
             <h6 class="small"><strong>Requirements</strong></h6>
-            <p class="small">Formating: <strong>Writing</strong></p>
+            <p class="small">Formating: <strong>{{ order.level }} Level</strong></p>
           </div>
         </div>
 
@@ -77,7 +77,7 @@
 
           {% if order.paid == False %}
       
-          <p class="small mb-3 mt-3 text-center" style="text-transform: uppercase; color: #A9A9A9; letter-spacing: 2px;">
+          <p class="small mb-3 mt-3 text-center" style="text-transform: uppercase; color: gray; letter-spacing: 2px;">
           <strong>
             TIME REMAINING:
             {% if order.days %}
@@ -92,7 +92,7 @@
       {% else %}
    
       
-      <p id="timer" class=" small text-center" style="text-transform: uppercase; color: #A9A9A9; letter-spacing: 2px;font-weight: bold;"></p>
+      <p id="timer" class=" small text-center" style="text-transform: uppercase; color: gray; letter-spacing: 2px;font-weight: bold;"></p>
       <p id="none" class=" small text-center" style="text-transform: uppercase; color: #A9A9A9; letter-spacing: 2px;font-weight: bold;"></p>
       <!--
       <p  id="days" style="display:inline-block; text-transform: uppercase; color: #A9A9A9; letter-spacing: 2px;font-weight: bold;" class="small text-center" ></p>
@@ -128,7 +128,7 @@
             <div class="unit unit-spacing-xs">
               <div class="unit-left"><span class="icon fa fa-graduation-cap"></span></div>
               <div class="unit-body">
-                <p >{{ order.subject}}</p>
+                <p style="color:black;"><strong>{{ order.subject}}</strong></p>
               </div>
             </div>
             
@@ -138,7 +138,7 @@
             <div class="unit unit-spacing-xs">
               <div class="unit-left"><span class="icon fa fa-file-text"></span></div>
               <div class="unit-body">
-                <p>{{ order.pages}} ({{ words}} Words)</p>
+                <p style="color:black;"><strong>{{ order.pages}} ({{ words}} Words)</strong></p>
               </div>
             </div>
 
@@ -151,7 +151,7 @@
             <div class="unit unit-spacing-xs">
               <div class="unit-left"><span class="icon fa fa-credit-card"></span></div>
               <div class="unit-body">
-                <p>KES {{ cost }}</p>
+                <p style="color:black;"><strong>KES {{ cost }}</strong></p>
               </div>
             </div>
 
@@ -166,9 +166,9 @@
               <div class="unit-left"><span class="icon fa fa-pencil"></span></div>
               <div class="unit-body">
                 {% if order.paid == False %}
-                <p><a href="{% url 'order_update' order.id %}" >Edit</a></p>
+                <p style="color:black;"><a href="{% url 'order_update' order.id %}" ><strong>Edit</strong></a></p>
                 {% else %}
-                <p><a data-toggle="tooltip" data-placement="top" title="Order Details Unchangeable After Payment">Edit</a></p>
+                <p style="color:black;"><a data-toggle="tooltip" data-placement="top" title="Order Details Unchangeable After Payment"><strong>Edit</strong></a></p>
                 {% endif %}
               </div>
             </div>
@@ -189,22 +189,28 @@
 
         <div class="text-left"> 
           {% if obj.instructions %}
-          <p class="text-left pl-2">{{ obj.instructions|safe}}</p>
+          <p class="text-left pl-2" style="color: black;">{{ obj.instructions|safe}}</p>
           {% endif %}
           {% if obj.file %}
+
           <div>
+            <a target="_blank" href="{{ obj.file.url }}" class="list-group-item list-group-item-action list-group-item-primary" style="padding:0.5rem;">
 
-            <div class="file-row-disp mt-4">
-              <div>
-                <span class="icon fa fa-file-text-o mb-1" style="font-size:5em;"></span>
+              <div class="file-row-disp mt-4">
+                <div>
+                  <span class="icon fa {{obj.css_class}} mb-1" style="font-size:5em;color:gray;"></span>
+                </div>
+                <div>
+                  <p>{{ obj.filename|truncatechars:15 }}</p>
+                </div>
+              
               </div>
-              <div>
-                <p><a target="_blank" href="{{ obj.file.url }}"  >Attachement</a></p>
-              </div>
-            
-            </div>
+              
 
+            </a>
           </div>
+
+        
           
 
           {% endif %}
@@ -229,6 +235,29 @@
             <p class="text-left pl-2">{{ obj.instructions|safe}}</p>
             {% endif %}
           </div>
+          {% if obj.file %}
+
+          <div>
+            <a target="_blank" href="{{ obj.file.url }}" class="list-group-item list-group-item-action list-group-item-primary" style="padding:0.5rem;">
+
+              <div class="file-row-disp mt-4">
+                <div>
+                  <span class="icon fa {{obj.css_class}} mb-1" style="font-size:5em;color:gray;"></span>
+                </div>
+                <div>
+                  <p>{{ obj.filename|truncatechars:15 }}</p>
+                </div>
+              
+              </div>
+              
+
+            </a>
+          </div>
+
+        
+          
+
+          {% endif %}
 
 
 
@@ -251,13 +280,15 @@
 
         {% elif obj.is_mod == True and obj.is_answer == True %}
        
-        <div style="background-color: lightcyan;padding-left:2rem;padding-top:0.5rem;">
+        <div style="background-color: lightcyan;padding-top:0.5rem;">
         
           <div>
             {% if obj.instructions %}
             <p class="text-left ml-3 pl-2">{{ obj.instructions|safe}}</p>
+            
             {% endif %}
           </div>
+          <p style="padding-left:0.5rem;">Project successfully completed. Let us know in case of any questions. Writers are on standby to assist.</p>
 
 
 
@@ -269,21 +300,28 @@
 
 
         {% if obj.file %}
+
         <div>
+          <a target="_blank" href="{{ obj.file.url }}" class="list-group-item list-group-item-action list-group-item-success" style="padding:0.5rem;">
 
-          <div class="file-row-disp mt-4">
-            <div>
-              <span class="icon fa fa-file-text-o mb-1" style="font-size:5em;"></span>
+            <div class="file-row-disp mt-4">
+              <div>
+                <span class="icon fa {{obj.css_class}} mb-1" style="font-size:5em;color:gray;"></span>
+              </div>
+              <div>
+                <p>{{ obj.filename|truncatechars:15 }}</p>
+              </div>
+            
             </div>
-            <div>
-              <p><a target="_blank" href="{{ obj.file.url }}"  >Attachement</a></p>
-            </div>
-          
-          </div>
+            
 
+          </a>
         </div>
+        {% endif %}
+        <p style="padding-left:0.5rem;">"Feel free to create new projects in a diverse range of both technical and non technical fields. Our writers are some of the best in the market and will deliver solutions that match your expectations." </p>
       </div>
-          {% endif %}
+          
+          
 
           <br>
           <div>
@@ -304,9 +342,11 @@
           {{ form.media }}
           {{ form.as_p }}
           <br>
-          <button type="submit" class="btn btn-primary mb-4" style="width: 100%;">Post</button>
+          <button type="submit" class="btn btn-primary mb-5" style="width: 100%;color:black;">Post</button>
           
         </form>
+       
+       
 
       </div>
 
