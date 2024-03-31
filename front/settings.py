@@ -30,6 +30,7 @@ DEBUG = config('DEBUG', cast=bool)
 # ALLOWED_HOSTS = ['mombasateacher.space', 'www.mombasateacher.space']
 
 ALLOWED_HOSTS = ['ace-stars.com', 'www.ace-stars.com']
+# ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [

@@ -1,0 +1,29 @@
+{% extends "frontmain/main.html" %}
+{% block title %}Post{% endblock %}
+{% load static %}
+{% block content %}
+
+
+
+
+<div class="blog-input">
+    <div></div>
+    <div>
+        {% for obj in posts %}
+        <div class="card" style="width: 18rem;float:left;margin-left:1%;">
+            <img class="card-img-top" src="{{ obj.img.url }}" width="287" height="180" alt="blog Image">
+            <div class="card-body">
+              <h5 class="card-title">{{ obj.title }}</h5>
+              <br>
+              <a href="{% url 'post-detail' obj.id %}" class="btn btn-primary">Read More</a>
+            </div>
+          </div>
+
+          {% endfor %}
+
+            
+    </div>
+    <div></div>
+</div>
+
+{% endblock %}

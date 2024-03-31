@@ -1,0 +1,77 @@
+{% extends "frontmain/orderslist.html" %}
+{% block title %}Create Order{% endblock %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<div class="new-order-input-main">
+    <div></div>
+    <div>
+        <div class="mt-4">
+        <h4>Message Us</h4>
+            {% load crispy_forms_tags %}
+            <br>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary mt-4 mb-3" style="width: 100%;">Post</button>
+                
+              </form>
+
+
+              <br><br><br>
+
+
+              {% for obj in myMessages %}
+       
+          <div >
+            {% if obj.text %}
+            <p class="text-left pl-2">{{ obj.text|safe}}</p>
+            {% endif %}
+          </div>
+          {% if obj.file %}
+
+          <div>
+            <a target="_blank" href="{{ obj.file.url }}" class="list-group-item list-group-item-action list-group-item-primary" style="padding:0.5rem;">
+
+              <div class="file-row-disp mt-4">
+                <div>
+                  <span class="icon fa {{obj.css_class}} mb-1" style="font-size:5em;color:gray;"></span>
+                </div>
+                <div>
+                  <p>{{ obj.filename|truncatechars:15 }}</p>
+                </div>
+              
+              </div>
+              
+
+            </a>
+          </div>
+
+        
+          
+
+          {% endif %}
+          <br>
+          <div>
+            <p class="text-right small">{{ obj.created_at|naturaltime }}</p>
+          </div>
+          <br>
+
+          {% endfor %}
+
+
+
+
+
+
+
+
+
+            </div>
+    </div>
+    <div></div>
+</div>
+
+
+{% endblock %}

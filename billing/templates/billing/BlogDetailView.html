@@ -1,0 +1,31 @@
+{% extends "frontmain/main.html" %}
+{% block title %}Post{% endblock %}
+{% load static %}
+{% block content %}
+
+
+
+
+<div class="blog-input">
+    <div></div>
+    <div>
+        
+
+        <div><h3><strong>{{ post.title }}</strong></h3></div>
+        <br>
+        <div>
+            <img class="card-img-top" src="{{ post.img.url }}" alt="blog Image">
+        </div>
+        <br><br>
+            
+        <div><p class="card-text">{{ post.text|safe }}</p></div>
+              
+    
+           
+
+            
+    </div>
+    <div></div>
+</div>
+
+{% endblock %}

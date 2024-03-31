@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from frontmain.models import Order, OrderData, PayInfo, Moderators, TestModel
+from custom_user.models import User
 from billing.models import PayData
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from frontmain.forms import OrderCreationForm, OrderDetailsForm, ModMessagesForm, FileOrderDetailsForm
@@ -80,7 +81,7 @@ def OrderDetail(request, id):
                 obj = form.save(commit=False)
                 obj.order = order
                 obj.save()
-                return redirect('order_detail', order.id)
+                return redirect('client-messages', order.id)
             else:
                 form = OrderDetailsForm()
         return render(request, 'frontmain/OrderDetail.html', {
@@ -111,21 +112,43 @@ def FileUploadView(request, id):
 def OrderListView(request):
     mine = request.user
     orders = Order.objects.filter(user=mine, complete=False, cancelled=False).order_by('-id')
-    fin = Order.objects.filter(user=mine, complete=True).order_by('-id')
-    return render(request, 'frontmain/OrderListView.html', {'orders':orders, 'fin':fin})
+    mod_user = Moderators.objects.filter(user=request.user)
+    if not mod_user:
+        print(mine.id)
+        return render(request, 'frontmain/OrderListView.html', {'orders':orders})
+    else:
+        return redirect('order-list-view-mods')
+    
+
+
+
+@login_required
+def OrderListViewMods(request):
+    orders = Order.objects.filter(complete=False, cancelled=False).order_by('-id')
+    return render(request, 'frontmain/OrderListView.html', {'orders':orders})
 
 
 @login_required
 def OrderListViewComplete(request):
-    mine = request.user
-    orders = Order.objects.filter(user=mine, complete=True, cancelled=False).order_by('-id')
-    return render(request, 'frontmain/OrderListViewComplete.html', {'orders':orders})
+    mod_user = Moderators.objects.filter(user=request.user)
+    if mod_user:
+        orders = Order.objects.filter(complete=True, cancelled=False).order_by('-id')[:50]
+        return render(request, 'frontmain/OrderListViewComplete.html', {'orders':orders})
+    else:
+        orders = Order.objects.filter(user=request.user, complete=True, cancelled=False).order_by('-id')[:30]
+        return render(request, 'frontmain/OrderListViewComplete.html', {'orders':orders})
+
 
 @login_required
 def OrderListViewAll(request):
-    mine = request.user
-    orders = Order.objects.filter(user=mine).order_by('-id')
-    return render(request, 'frontmain/OrderListViewAll.html', {'orders':orders})
+    mod_user = Moderators.objects.filter(user=request.user)
+    if mod_user:
+        orders = Order.objects.all().order_by('-id')[:50]
+        return render(request, 'frontmain/OrderListViewAll.html', {'orders':orders})
+    else:
+        orders = Order.objects.filter(user=request.user).order_by('-id')[:30]
+        return render(request, 'frontmain/OrderListViewAll.html', {'orders':orders})
+    
 
 def MakePayment(request, id):
     order = Order.objects.get(id=id)
@@ -197,11 +220,12 @@ def OrderMessagesNotification(request, id):
     else:
         title = order.subject
     discipline = order.subject
-    email = str(request.user.email)
+    #email = str(request.user.email)
+    email = 'bestessays001@gmail.com'
     html_template = 'frontmain/ordermessages.html'
     html_message = render_to_string(html_template, {'title': title, 'discipline': discipline, 'order_num':order_num})
-    subject = 'New Message on Your Order'
-    email_from = 'Testprep@testprepken.com'
+    subject = 'New Message on Order {0}'.format(order.id)
+    email_from = 'Ace@testprepken.com'
     recipient_list = [email]
     message = EmailMessage(subject, html_message, email_from, recipient_list)
     message.content_subtype = 'html'
@@ -263,7 +287,10 @@ def orderDetailModView(request, id):
                 order.complete = True
                 order.save()
             obj.save()
-            return redirect('order_detail', order.id)
+            if obj.is_answer == True:
+                return redirect('order-complete-email', order.id)
+            else:
+                return redirect('order_emails_messages', order.id)
         else:
             form = ModMessagesForm()
     return render(request, 'frontmain/OrderDetail.html', {
@@ -291,4 +318,51 @@ def Cancel(request, id):
     order.save()
     messages.success(request, f'Order cancelled successfully')
     return redirect('home')
+
+
+
+@login_required
+def OrderMessagesNotificationMod(request, id):
+    order = Order.objects.get(id=id)
+    order_num = order.id
+    if order.title:
+        title = order.title
+    else:
+        title = order.subject
+    discipline = order.subject
+    email = str(order.user)
+    #email = 'bestessays001@gmail.com'
+    html_template = 'frontmain/ordermessages.html'
+    html_message = render_to_string(html_template, {'title': title, 'discipline': discipline, 'order_num':order_num})
+    subject = 'New Message on Your Order - 755765{0}'.format(order.id)
+    email_from = 'Ace@testprepken.com'
+    recipient_list = [email]
+    message = EmailMessage(subject, html_message, email_from, recipient_list)
+    message.content_subtype = 'html'
+    message.send(fail_silently=True)
+    return redirect('order_detail', order.id)
+
+
+@login_required
+def OrderCompleteNotification(request, id):
+    order = Order.objects.get(id=id)
+    order_num = order.id
+    if order.title:
+        title = order.title
+    else:
+        title = order.subject
+    discipline = order.subject
+    email = str(order.user)
+    #email = 'bestessays001@gmail.com'
+    html_template = 'frontmain/ordermessagesmod.html'
+    html_message = render_to_string(html_template, {'title': title, 'discipline': discipline, 'order_num':order_num})
+    subject = 'Order Complete - 755765{0}'.format(order.id)
+    email_from = 'Ace@testprepken.com'
+    recipient_list = [email]
+    message = EmailMessage(subject, html_message, email_from, recipient_list)
+    message.content_subtype = 'html'
+    message.send(fail_silently=True)
+    return redirect('order_detail', order.id)
+
+
 

@@ -61,7 +61,7 @@
         {% endif %}
         {% if order.paid == False %}
         <div class="alert alert-primary mt-2" role="alert">
-          Complete your order by making a payment. <a href="{% url 'order_payment' order.id %}" class="alert-link">Click Here to Proceed</a>
+          Complete your order by making a payment. <a href="{% url 'proceed_payment' order.id %}" class="alert-link">Click Here to Proceed</a>
         </div>
         {% endif %}
 
@@ -302,7 +302,7 @@
         {% if obj.file %}
 
         <div>
-          <a target="_blank" href="{{ obj.file.url }}" class="list-group-item list-group-item-action list-group-item-success" style="padding:0.5rem;">
+          <a target="_blank" href="{{ obj.file.url }}" class="list-group-item list-group-item-action" style="padding:0.5rem;">
 
             <div class="file-row-disp mt-4">
               <div>

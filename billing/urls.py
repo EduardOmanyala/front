@@ -18,6 +18,11 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="billing/password_reset_form.html"), name='password_reset_confirm'),
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="billing/password_reset_done.html"), name='password_reset_complete'),
     path('test1/', bill_views.mailtest1, name='mailtest'),
+    path('users/messages/', bill_views.ContactUsView, name='contact-us-view'),
+    path('users/messages/notifications/sent/<int:id>/', bill_views.ContactNotification, name='contact-us-notification'),
+    path('blog/posts', bill_views.BlogPostListView, name='post-list'),
+    path('blog/posts/create', bill_views.BlogPostCreateView, name='post-create'),
+    path('blog/posts/<int:id>/', bill_views.BlogPostDetailView, name='post-detail'),
 
 
 ]

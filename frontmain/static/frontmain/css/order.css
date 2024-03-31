@@ -5,6 +5,12 @@
 
 }
 
+@media screen and (max-width: 600px) {
+    .orderdashsection {
+        grid-template-columns: 100%;
+    }
+}
+
 .orderdetailsmain {
     margin-right:2%;
     margin-left:2%;
@@ -22,6 +28,12 @@
     border-bottom: 1px solid gainsboro;
 }
 
+@media screen and (max-width: 600px) {
+    .order-details1 {
+        grid-template-columns: 100%;
+    }
+}
+
 .fsmall {
     font-size: small"
 }
@@ -36,10 +48,25 @@
     background-color: white;
 }
 
+@media screen and (max-width: 600px) {
+    .orderdetails {
+        grid-template-columns: 100%;
+    }
+}
+
+
 .orderlistdiv {
     display: grid;
     grid-template-columns: 55% 25% 20%;
 }
+
+@media screen and (max-width: 600px) {
+    .orderlistdiv {
+        grid-template-columns: 100%;
+    }
+}
+
+
 
 .fin-orders {
     border-top: 1px solid gainsboro;
@@ -51,6 +78,12 @@
     grid-template-columns: 60% 40%;
     background-color: #151515;
 
+}
+
+@media screen and (max-width: 600px) {
+    .home-main {
+        grid-template-columns: 100%;
+    }
 }
 
 .form-div-wrapp {
@@ -68,11 +101,24 @@
     grid-template-columns: 30% 40% 30%;
 }
 
+@media screen and (max-width: 600px) {
+    .new-order-input {
+        grid-template-columns: 100%;
+    }
+}
+
 .new-order-input-main {
     display: grid;
     grid-template-columns: 30% 40% 30%;
-    height: 88vh;
+    min-height: 88vh;
     background-color: whitesmoke;
+}
+
+@media screen and (max-width: 600px) {
+    .new-order-input-main {
+        grid-template-columns: 100%;
+        margin: 2%;
+    }
 }
 
 .file-row-disp {
@@ -85,6 +131,13 @@
     display: grid;
     grid-template-columns: 10% 80% 10%;
 }
+
+@media screen and (max-width: 600px) {
+    .home-content-1 {
+        grid-template-columns: 100%;
+    }
+}
+
 
 .home-content-2 {
     padding-top: 9em;
@@ -115,11 +168,25 @@
     background-image: repeating-linear-gradient(45deg, #444cf7 0, #444cf7 1px, #e5e5f7 0, #e5e5f7 50%);
 
 }
+
+@media screen and (max-width: 600px) {
+    .sided {
+        display: none;
+    }
+    .sided2 {
+        display: none;
+    }
+}
 .in-progress {
     display: grid;
     grid-template-columns: 15% 85%;
 }
 
+@media screen and (max-width: 600px) {
+    .in-progress {
+        grid-template-columns: 100%;
+    }
+}
 
 .order-link a:hover {
     color:green;
@@ -138,4 +205,16 @@
     margin-top: 5%;
     margin-left: 20%;
     margin-right: 20%;
+}
+
+
+.blog-input {
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+}
+
+@media screen and (max-width: 600px) {
+    .blog-input {
+        grid-template-columns: 100%;
+    }
 }

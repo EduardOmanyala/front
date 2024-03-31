@@ -87,19 +87,19 @@
                 <!-- RD Navbar Toggle-->
                 <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                 <!-- RD Navbar Brand-->
-                <div class="rd-navbar-brand"><a class="brand-name" href="index.html"><img class="logo-default" src="{% static 'frontmain/images/logo-default-208x463.png' %}" alt="" width="208" height="46"/><img class="logo-inverse" src="{% static 'frontmain/images/logo-inverse-208x46.png' %}" alt="" width="208" height="46"/></a></div>
+                <!-- <div class="rd-navbar-brand"><a class="brand-name" href="index.html"><img class="logo-default" src="{% static 'frontmain/images/logo-default-208x463.png' %}" alt="" width="208" height="46"/><img class="logo-inverse" src="{% static 'frontmain/images/logo-inverse-208x46.png' %}" alt="" width="208" height="46"/></a></div> -->
               </div>
               <div class="rd-navbar-aside-right">
                 <div class="rd-navbar-nav-wrap">
                   <!-- RD Navbar Nav-->
                   <ul class="rd-navbar-nav">
-                    <li><a href="index.html">Home</a>
+                    <li><a href="{% url 'home' %}">Home</a>
                     </li>
-                    <li class="active"><a href="about-us.html">About Us</a>
+                    <li class="active"><a href="{% url 'about' %}">About Us</a>
                     </li>
                     <li><a href="contacts.html">Contacts</a>
                     </li>
-                    <li><a href="typography.html">Typography</a>
+                    <li><a href="typography.html">Blog</a>
                     </li>
                   </ul>
                 </div>
@@ -125,7 +125,7 @@
         <div class="container container-bigger">
           <div class="row row-50 justify-content-md-center align-items-lg-center justify-content-xl-between flex-lg-row-reverse">
             <div class="col-md-10 col-lg-6 col-xl-5">
-              <h3>hi, we are sealine</h3>
+              <h3>hi, we are Ace-Stars</h3>
               <div class="divider divider-decorate"></div>
               <p class="heading-5">We are a team of highly skilled writers and researchers who specialize in both academic as well as article writing. Our writers have been thoroughly vetted and are some of the best in the industry in terms of quality. </p>
               <p class="text-spacing-sm">Getting talented and high quality writers is among the biggest challenge in the industry. More often than not one ends up with unseasoned newbies who don’t understand the mechanics of writing as well as carrying out detailed research. We hope to solve this problem for you by linking you with some of the best writers on the market.  </p><a class="button button-default-outline button-nina" href="#">learn more</a>

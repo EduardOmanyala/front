@@ -146,7 +146,7 @@
                     </li>
                     <li><a href="{% url 'order-list-view-complete' %}">Complete</a>
                     </li>
-                    <li><a href="typography.html">Contact</a>
+                    <li><a href="{% url 'contact-us-view' %}">Contact</a>  
                     </li>
                   </ul>
                 </div>
@@ -164,8 +164,9 @@
             </div>
             <div id="myDropdown" class="dropdown-content">
               <a href="#">My Profile</a>
-              <a href="#">In Progress</a>
+              <a href="{% url 'order-list-view' %}">In Progress</a>
               <a href="{% url 'order-list-view-all' %}">All My Orders</a>
+              <a href="{% url 'post-list' %}">Blog</a>
               <a href="{% url 'logout' %}">Logout</a>
             </div>
           </nav>

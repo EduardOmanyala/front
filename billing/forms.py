@@ -1,5 +1,6 @@
 from django import forms 
 from custom_user.models import User
+from billing.models import Contact, BlogPost
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -20,3 +21,14 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email', 'password1','password2')
+
+
+class ContactUsForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['text', 'file']
+
+class BlogPostForm(forms.ModelForm):
+    class Meta:
+        model = BlogPost
+        fields = ['title', 'text', 'img']

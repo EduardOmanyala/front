@@ -61,52 +61,58 @@
     <div class="orderdetails">
         <div class="sidediv1"></div>
         <div class="mt-3">
-          
-            <div style="border-bottom: 1px solid gainsboro;">
+
+
+             <div class="list-group">
             {% for obj in orders %}
-            <div class="orderlistdiv pt-3 pb-3">
-                
-                <div>
-                    {% if obj.title %}
-                    <a class="pl-2" style="padding-left:2rem;" href="{% url 'order_detail' obj.id %}"><strong>{{ obj.title|truncatewords:5 }}</strong></a>
-                    {% else %}
-                    <a class="pl-2" style="padding-left:2rem;" href="{% url 'order_detail' obj.id %}"><strong>{{ obj.subject }} Essay</strong></a>
-                    {% endif %}
-                </div>
-
-                
-                <div>
-
-                    <div class="in-progress">
+            
+            <a href="{% url 'order_detail' obj.id %}" class="list-group-item list-group-item-action">
+                <div class="orderlistdiv">
+                    <div>
+                        {% if obj.title %}
+                        <strong>{{ obj.title|truncatewords:5 }}</strong>
+                        {% else %}
+                        <strong>{{ obj.subject }} Essay</strong>
+                        {% endif %}
+                    </div>
+                    <div >
+                       
+                        <div class="in-progress">
                         <div>
-                            <span class="icon fa fa-check-square-o fa-2x mb-1" style="color:green"></span> 
+                            <span class="icon fa fa-check-square-o fa-2x mb-1" style="color:green"></span>
+                            
                             <!--<img src="{% static 'frontmain/images2/arrows.png' %}" style="width: 100%;" alt="Computer man" > -->
                         </div>
                         <div>
                             <p style="color:black;"><strong>&nbsp;&nbsp;Complete</strong></p>
                         </div>
+                        </div>
+                      
+
+                        
+                      
                     </div>
                     
-                 
-
+                    <div>
+                        
+                        <p style="color:dodgerblue;"><strong>
+                            {% if obj.days and obj.days > 1 %}
+                            {{ obj.days }} days&nbsp;
+                            {% elif obj.days and obj.days == 1%}
+                            {{ obj.days }} day&nbsp;
+                            {% endif %}
+                            {% if obj.hours and obj.hours > 1 %}
+                            {{ obj.hours }} hours
+                            {% elif obj.hours and obj.hours == 1 %}
+                            {{ obj.hours }} hour
+                            {% endif %}
+                            </strong>
+                        </p> 
+               
+                        
+                    </div>
                 </div>
-                <div >
-
-
-
-
-
-
-      
-                    <p style="color:black;"><strong>
-                        {% if obj.days %}
-                        {{ obj.days }} D&nbsp;&nbsp;
-                        {% endif %}
-                        {% if obj.hours %}
-                        {{ obj.hours }} H
-                        {% endif %}
-                        </strong>
-                        </p>         
+            </a>
 
 
 
@@ -114,19 +120,27 @@
 
 
 
-
-
-
-
-                    
-
-                </div>
-            </div>
-            
-            
-            
             {% endfor %}
-        </div>
+           
+            
+          </div>
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
            
 
