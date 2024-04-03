@@ -184,7 +184,10 @@
               <a href="#">My Profile</a>
               <a href="#">In Progress</a>
               <a href="{% url 'post-list' %}">Blog</a>
-              <a href="{% url 'logout' %}">Logout</a>
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+              <a href="#" onclick="this.parentNode.submit();">Logout</a>
+              </form>
             </div>
           </nav>
         </div>

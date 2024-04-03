@@ -42,7 +42,7 @@ def mpesarequest(request):
 @login_required
 def Proceed2Payment(request, id):
     order = Order.objects.get(id=id)
-    cost = order.pages * 300
+    cost = order.pages * 1
     order_id = order.id
     print(cost)
     return render(request, 'billing/payment.html', {'cost':cost, 'order_id':order_id})
