@@ -23,6 +23,8 @@ urlpatterns = [
     path('blog/posts', bill_views.BlogPostListView, name='post-list'),
     path('blog/posts/create', bill_views.BlogPostCreateView, name='post-create'),
     path('blog/posts/<int:id>/', bill_views.BlogPostDetailView, name='post-detail'),
+    path('accesstoken/', bill_views.get_access_token, name='get_access_token'),
+     path('stkpush', bill_views.initiate_stk_push, name='initiate_stk_push'),
 
 
 ]
