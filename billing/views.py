@@ -18,6 +18,7 @@ from datetime import timedelta
 import random
 
 from datetime import datetime, timezone
+from front.settings import MPESA_CONSUMER_KEY, MPESA_CONSUMER_SECRET, MPESA_PASSKEY, MPESA_SHORTCODE
 
 # Create your views here.
 
@@ -243,11 +244,9 @@ def BlogPostDetailView(request, id):
 #mpesa
 
 def get_access_token(request):
-    consumer_key = "HVRNBA4cZQAud3sylx7zIUaHwlXoH5kZDLjWlzKEZpiBx8dJ"  
-    consumer_secret = "sDyBNqpZf7X0KPAWiTEb1Fm2hpZGrYUTcDYxdG9B425h8ADgDUA2Ptyn9gh4xEPy"  
-    access_token_url = 'https://api.safaricom.co.ke/oauth/v1/generate'
+    access_token_url = 'https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
     headers = {'Content-Type': 'application/json'}
-    auth = (consumer_key, consumer_secret)
+    auth = (MPESA_CONSUMER_KEY, MPESA_CONSUMER_SECRET)
     try:
         response = requests.get(access_token_url, headers=headers, auth=auth)
         response.raise_for_status() 
@@ -266,7 +265,7 @@ def format_phone_number(phone_number):
 
 def initiate_stk_push(request):
     if request.method == 'POST':
-        amount = int(request.POST['price'])
+        amount_val = int(request.POST['price'])
         ordernumber = request.POST['order_pk']
         phonenumber_pay = str(request.POST['phonenumber'])
         number_pay = '254' + phonenumber_pay[-9:]
@@ -280,17 +279,15 @@ def initiate_stk_push(request):
             access_token_json = json.loads(access_token)
             access_token = access_token_json.get('access_token')
             if access_token:
-                amount = 1
+                amount = amount_val
                 phone = number_pay
-                passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
-                business_short_code = '174379'
-                process_request_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
+                process_request_url = 'https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
                 callback_url = 'https://ace-stars.com/payment/callback/{0}/{1}/'.format(user_id, ordernumber)
                 timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-                password = base64.b64encode((business_short_code + passkey + timestamp).encode()).decode()
+                password = base64.b64encode((MPESA_SHORTCODE + MPESA_PASSKEY + timestamp).encode()).decode()
                 party_a = phone
                 party_b = ''
-                account_reference = 'UMESKIA SOFTWARES'
+                account_reference = 'Order 79654{0}'.format(ordernumber)
                 transaction_desc = 'stkpush test'
                 stk_push_headers = {
                     'Content-Type': 'application/json',
@@ -298,13 +295,13 @@ def initiate_stk_push(request):
                 }
                 
                 stk_push_payload = {
-                    'BusinessShortCode': business_short_code,
+                    'BusinessShortCode': MPESA_SHORTCODE,
                     'Password': password,
                     'Timestamp': timestamp,
                     'TransactionType': 'CustomerPayBillOnline',
                     'Amount': amount,
                     'PartyA': party_a,
-                    'PartyB': business_short_code,
+                    'PartyB': MPESA_SHORTCODE,
                     'PhoneNumber': party_a,
                     'CallBackURL': callback_url,
                     'AccountReference': account_reference,
