@@ -72,6 +72,12 @@ def PaymentEmail(request, order_id):
 
 
 
+@login_required
+def PaymentRedirectEmail(request, id):
+    order_id = Order.objects.get(id=id)
+   
+    return redirect('payment-complete', order_id) 
+
 
 
 
@@ -168,7 +174,7 @@ def register(request):
 
 
 def mailtest1(request):
-    send_mail('AUsing SparkPost with Django123', 'This is a message from Django using SparkPost!123', 'Ace@testprepken.com',
+    send_mail('AsdsUsing SparkPost with Django123', 'This is a message from Django using email', 'no-reply@ace-stars.com',
     ['bestessays001@gmail.com'], fail_silently=True)
     return redirect('home')
 
