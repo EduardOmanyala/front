@@ -158,8 +158,8 @@ def register(request):
             messages.success(request, f'Account Created for {email}, you can now login')
             html_template = 'billing/welcomemail.html'
             html_message = render_to_string(html_template)
-            subject = 'Welcome to Testprep!'
-            email_from = 'Testprep@testprepken.com'
+            subject = 'Welcome to Ace-Stars!'
+            email_from = 'Ace@testprepken.com'
             recipient_list = [email]
             message = EmailMessage(subject, html_message,
                                    email_from, recipient_list)
@@ -332,3 +332,12 @@ def initiate_stk_push(request):
                 return JsonResponse({'error': 'Access token not found.'})
         else:
             return JsonResponse({'error': 'Failed to retrieve access token.'})
+        
+
+
+    
+def Profile(request):
+    all = Order.objects.filter(user=request.user).count()
+    complete = Order.objects.filter(user=request.user, complete=True).count()
+    current = Order.objects.filter(user=request.user, complete=False).count()
+    return render(request, 'billing/profile.html', {'all':all, 'complete':complete, 'current':current})

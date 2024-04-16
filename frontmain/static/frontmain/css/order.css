@@ -5,7 +5,7 @@
 
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .orderdashsection {
         grid-template-columns: 100%;
     }
@@ -28,14 +28,14 @@
     border-bottom: 1px solid gainsboro;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .order-details1 {
         grid-template-columns: 100%;
     }
 }
 
 .fsmall {
-    font-size: small"
+    font-size: small;
 }
 
 
@@ -48,7 +48,7 @@
     background-color: white;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .orderdetails {
         grid-template-columns: 100%;
     }
@@ -60,7 +60,7 @@
     grid-template-columns: 55% 25% 20%;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .orderlistdiv {
         grid-template-columns: 100%;
     }
@@ -80,7 +80,7 @@
 
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .home-main {
         grid-template-columns: 100%;
     }
@@ -101,7 +101,7 @@
     grid-template-columns: 30% 40% 30%;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .new-order-input {
         grid-template-columns: 100%;
     }
@@ -114,7 +114,7 @@
     background-color: whitesmoke;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .new-order-input-main {
         grid-template-columns: 100%;
         margin: 2%;
@@ -132,7 +132,7 @@
     grid-template-columns: 10% 80% 10%;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .home-content-1 {
         grid-template-columns: 100%;
     }
@@ -169,11 +169,14 @@
 
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .sided {
         display: none;
     }
     .sided2 {
+        display: none;
+    }
+    .sidediv1 {
         display: none;
     }
 }
@@ -182,7 +185,7 @@
     grid-template-columns: 15% 85%;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .in-progress {
         grid-template-columns: 100%;
     }
@@ -213,7 +216,7 @@
     grid-template-columns: 15% 70% 15%;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .blog-input {
         grid-template-columns: 100%;
     }

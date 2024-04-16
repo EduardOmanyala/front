@@ -7,7 +7,7 @@ urlpatterns = [
     path('payments', bill_views.payment, name='payment'),
     path('order/details/payment/<int:id>/', bill_views.Proceed2Payment, name='proceed_payment'),
     path('getpayment/<int:id>/', bill_views.getPayment, name='get_payment'),
-    path('payment/complete/<int:order_id>/', bill_views.PaymentRedirectEmail, name='payment-red-email'),
+    path('payment/complete/<int:id>/', bill_views.PaymentRedirectEmail, name='payment-red-email'),
     path('payment/complete/<int:order_id>/', bill_views.PaymentEmail, name='payment-complete'),
     path('payment/callback/<int:id>/<int:ord_id>/', bill_views.callbackurl, name='callback_payment'),
     path('mpesa/request/', bill_views.mpesarequest, name='mpesa_payment'),
@@ -25,7 +25,8 @@ urlpatterns = [
     path('blog/posts/create', bill_views.BlogPostCreateView, name='post-create'),
     path('blog/posts/<int:id>/', bill_views.BlogPostDetailView, name='post-detail'),
     path('accesstoken/', bill_views.get_access_token, name='get_access_token'),
-     path('stkpush', bill_views.initiate_stk_push, name='initiate_stk_push'),
+    path('stkpush', bill_views.initiate_stk_push, name='initiate_stk_push'),
+    path('profile', bill_views.Profile, name='profile'),
 
 
 ]

@@ -181,8 +181,8 @@
 
             </div>
             <div id="myDropdown" class="dropdown-content">
-              <a href="#">My Profile</a>
-              <a href="#">In Progress</a>
+              <a href="{% url 'profile' %}">My Profile</a>
+              <a href="{% url 'order-list-view' %}">In Progress</a>
               <a href="{% url 'post-list' %}">Blog</a>
               <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
@@ -238,7 +238,7 @@
       <footer class="section page-footer page-footer-minimal novi-background bg-cover text-center bg-gray-darker">
         <div class="container container-wide">
           <div class="row row-fix justify-content-sm-center align-items-md-center row-30">
-            <div class="col-md-10 col-lg-7 col-xl-4 text-xl-left"><a href="index.html"><img class="inverse-logo" src="images/logo-inverse-208x46.png" alt="" width="208" height="46"/></a></div>
+            <div class="col-md-10 col-lg-7 col-xl-4 text-xl-left"><a href="index.html"><img class="inverse-logo" src="{% static 'frontmain/images/logo-default-208x463.png' %}" alt="" width="208" height="46"/></a></div>
             <div class="col-md-10 col-lg-7 col-xl-4">
               <p class="right">&#169;&nbsp;<span class="copyright-year"></span> All Rights Reserved. Ace-Stars.Com</a></p>
             </div>
