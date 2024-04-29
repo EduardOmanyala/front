@@ -262,8 +262,8 @@ button.addEventListener("click", () => {
             success: function(data){
                 // Perform operation on return value
                 $("#paysuccess").show();
-                window.location.href = '{% url "payment-complete" order_id %}'; 
-                  //window.location.href= '{% url "home" %}';
+                //window.location.href = '{% url "payment-complete" order_id %}'; 
+                window.location.href= '{% url "home" %}';
 
                   //setTimeout(function () {
                     //window.location.href = '{% url "payment-red-email" order_id %}'; //will redirect to your blog page (an ex: blog.html)
