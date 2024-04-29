@@ -262,7 +262,7 @@ button.addEventListener("click", () => {
             success: function(data){
                 // Perform operation on return value
                 $("#paysuccess").show();
-                window.location.href = '{% url "payment-red-email" order_id %}'; 
+                window.location.href = '{% url "payment-complete" order_id %}'; 
                   //window.location.href= '{% url "home" %}';
 
                   //setTimeout(function () {
