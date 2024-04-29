@@ -73,7 +73,7 @@ def OrderDetail(request, id):
         paid = PayData.objects.filter(order=order).values_list('created_at', flat = True)
         form = OrderDetailsForm()
         orderinfo = OrderData.objects.filter(order=order)
-        cost = order.pages * 1
+        cost = order.pages * 300
         words = order.pages * 275
         if request.method == "POST":
             form = OrderDetailsForm(request.POST, request.FILES)
