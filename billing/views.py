@@ -74,9 +74,8 @@ def PaymentEmail(request, order_id):
 
 @login_required
 def PaymentRedirectEmail(request, id):
-    order_id = Order.objects.get(id=id)
-   
-    return redirect('payment-complete', order_id) 
+    order = Order.objects.get(id=id)
+    return redirect('payment-complete', order.id) 
 
 
 
